@@ -1,0 +1,1 @@
+require 'validates_and_formats_phones'

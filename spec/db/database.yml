@@ -1,0 +1,3 @@
+sqlite3:
+  :adapter: sqlite3
+  :dbfile: vendor/plugins/validates_and_formats_phones/spec/validates_phones_plugin.sqlite3.db
