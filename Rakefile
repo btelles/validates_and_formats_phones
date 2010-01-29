@@ -29,7 +29,7 @@ spec = Gem::Specification.new do |s|
   s.email = "btelles@gmail.com"
   s.homepage = "http://github.com/btelles/validates_and_formats_phones"
   s.platform = Gem::Platform::RUBY
-  s.summary = "Allows you to easily format and validate formats in any format you desire (sensible defaults provided)."
+  s.summary = "Allows you to easily format and validate phone numbers in any format you desire (sensible defaults provided)."
   s.files = PKG_FILES.to_a
   s.require_path = "lib"
 

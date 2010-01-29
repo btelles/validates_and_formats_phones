@@ -1,7 +1,7 @@
 ValidatesAndFormatsPhones
 =========================
 
-Allows you to easily format and validate formats in any format you desire 
+Allows you to easily format and validate phone numbers your desired format you desire 
 (sensible defaults provided).
 
 Just add 'validates_and_formats_phones' to your ActiveRecord model.
