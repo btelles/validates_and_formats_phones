@@ -4,8 +4,9 @@ class Phone < ActiveRecord::Base
   validates_and_formats_phones 
 end
 class OptionsPhone < ActiveRecord::Base
-  validates_and_formats_phones :other_phone, 8 => '####-####',
-                                             10 => '(###) ###-####'
+  validates_and_formats_phones :other_phone, 
+                               '####-####',
+                               '(###) ###-####'
 end
 
 describe "ValidatesAndFormatsPhones" do
