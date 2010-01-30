@@ -1,5 +1,4 @@
-ValidatesAndFormatsPhones
-=========================
+!! ValidatesAndFormatsPhones
 
 Allows you to easily format and validate phone numbers in your desired format 
 (sensible defaults provided).
@@ -10,8 +9,7 @@ The default format is a 10-digit US phone number on the column 'phone'.
 But you can change all that...just read on.
 
 
-Example
-=======
+!!!Example
 
 
 Adding the validates_and_formats_phones method by itself gives you
