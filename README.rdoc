@@ -1,4 +1,4 @@
-!! ValidatesAndFormatsPhones
+= ValidatesAndFormatsPhones
 
 Allows you to easily format and validate phone numbers in your desired format 
 (sensible defaults provided).
@@ -8,8 +8,20 @@ Just add 'validates_and_formats_phones' to your ActiveRecord model.
 The default format is a 10-digit US phone number on the column 'phone'.
 But you can change all that...just read on.
 
+== Installation
 
-!!!Example
+1. Install it as a gem:
+
+      sudo gem install validates_and_formats_phones
+
+2. Then add it to your <tt>environment.rb</tt> file
+
+      config.gem 'validates_and_formats_phones'
+
+3. Add the method <tt>validates_and_formats_phones</tt> to your model
+
+
+== Example
 
 
 Adding the validates_and_formats_phones method by itself gives you
