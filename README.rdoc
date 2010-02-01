@@ -51,10 +51,15 @@ You can pass your own fields like so:
 Or your own formats by using a # symbol for number substitutions:
 
   class Person
-    validates_and_formats_phones '####-####'
+    validates_and_formats_phones '####-####', '### ###-####'
   end
 
-or both, like so:
+Note that the validation is simplistic. It counts the number of digits in the given field.
+If the number of digits in the given field matches one of the formats, then the validation
+passes and the format that has the same number of '#' symbols will be used to format
+the phone number.
+
+You can also format and specify fields, like so:
 
   class Person
     validates_and_formats_phones :fax, mobile, '####-####'
