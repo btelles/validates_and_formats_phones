@@ -12,7 +12,7 @@ end
 describe "ValidatesAndFormatsPhones" do
 
   valid_phones = ['1234567890', '123-456-7890', '(123) 456-7890', 'o123.456-7890']
-  invalid_phones = ['01234567890', '12-456-7890', '(123) 456-8', 'o1123.456-7890']
+  invalid_phones = ['01234567890', '12-456-7890', '(123) 456-8', 'o1123.456-7890', 'invalid']
 
   valid_phones.each do |phone|
     it "allows saving of valid phone #{phone}" do
@@ -54,15 +54,12 @@ describe "ValidatesAndFormatsPhones" do
   describe "rejects invalid formats" do
     invalid_phones.each do |invalid_number|
       it "when on the default field" do
-        lambda {
-          Phone.create!(:phone => invalid_number)
-        }.should raise_error
+         phone = Phone.create(:phone => invalid_number)
+         phone.errors.full_messages[0].should =~ /one must have .*digits\./
       end
       it "when on a non-default field" do
-        lambda {
-          OptionsPhone.create!(:other_phone => invalid_number)
-        }.should raise_error
-
+         phone = OptionsPhone.create(:other_phone => invalid_number)
+         phone.errors.full_messages[0].should =~ /one must have.*digits\./
       end
 
     end

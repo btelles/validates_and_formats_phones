@@ -29,8 +29,9 @@
             else
               record.errors.add attr, "must have #{size_options[0]} digits."
             end
+          else
+            record.format_phone_fields(fields, formats)
           end
-        after_validation {|record| record.format_phone_fields(fields, formats) }
         end
       end
     end
