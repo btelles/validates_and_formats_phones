@@ -23,7 +23,7 @@ PKG_FILES = FileList[
 
 spec = Gem::Specification.new do |s|
   s.name = "validates_and_formats_phones"
-  s.version = "0.0.2"
+  s.version = "0.0.1"
 
   s.author = "Bernie Telles"
   s.email = "btelles@gmail.com"
