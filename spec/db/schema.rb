@@ -4,6 +4,7 @@ ActiveRecord::Schema.define(:version => 0) do
   end
   create_table :options_phones, :force => true do |t|
     t.string :other_phone
+    t.string :fax
   end
 
 end

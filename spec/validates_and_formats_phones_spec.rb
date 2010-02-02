@@ -4,7 +4,7 @@ class Phone < ActiveRecord::Base
   validates_and_formats_phones 
 end
 class OptionsPhone < ActiveRecord::Base
-  validates_and_formats_phones :other_phone, 
+  validates_and_formats_phones :other_phone, :fax,
                                '####-####',
                                '(###) ###-####'
 end

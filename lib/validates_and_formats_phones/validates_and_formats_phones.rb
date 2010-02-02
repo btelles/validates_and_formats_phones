@@ -30,7 +30,7 @@
               record.errors.add attr, "must have #{size_options[0]} digits."
             end
           else
-            record.format_phone_fields(fields, formats)
+            record.format_phone_field(attr, formats)
           end
         end
       end
@@ -38,15 +38,9 @@
 
     module InstanceMethods
 
-      def format_phone_fields(fields = [:phone], formats = [])
-        formats << DEFAULT_FORMAT if formats.empty?
-        fields.each do |field_name|
-          format_phone_field(field_name, formats) unless send(field_name).blank?
-        end
-      end
       def format_phone_field(field_name, formats = [])
         formats << DEFAULT_FORMAT if formats.empty?
-        self.send("#{field_name}=", self.send(field_name).to_s.to_phone(formats))
+        self.send("#{field_name}=", self.send(field_name).to_s.to_phone(formats)) unless send(field_name).blank?
       end
     end
   end
