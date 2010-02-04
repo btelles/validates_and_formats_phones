@@ -2,6 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'rake/gempackagetask'
 require 'spec/rake/spectask'
+require 'metric_fu'
 
 desc 'Default: run specs.'
 task :default => :spec
