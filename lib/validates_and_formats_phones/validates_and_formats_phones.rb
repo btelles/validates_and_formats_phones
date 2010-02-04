@@ -8,16 +8,7 @@
 
 
       def validates_and_formats_phones(*args)
-        formats = []
-        fields = []
-        args.each do |option|
-          option.to_s =~ /#/ ?
-            formats << option :
-            fields << option.to_sym
-        end
-        formats << DEFAULT_FORMAT if formats.empty?
-        fields  << :phone if fields.empty?
-
+        formats, fields = extract_formats_and_fields(args)
         send :include, InstanceMethods
 
         validates_each *fields do |record, attr, value|
@@ -33,6 +24,21 @@
             record.format_phone_field(attr, formats)
           end
         end
+      end
+
+      private
+
+      def extract_formats_and_fields(formats_and_fields)
+        formats = []
+        fields = []
+        formats_and_fields.each do |option|
+          option.to_s =~ /#/ ?
+            formats << option :
+            fields << option.to_sym
+        end
+        formats << DEFAULT_FORMAT if formats.empty?
+        fields  << :phone if fields.empty?
+        [formats, fields]
       end
     end
 
