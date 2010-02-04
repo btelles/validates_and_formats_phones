@@ -5,7 +5,7 @@ String.class_eval do
   def to_phone(*args)
     args.empty? ?
       formats = {10 => '(###) ###-####'} :
-      formats = format_sizes(args)
+      formats = args.flatten.inject({}) { |all_formats, format| all_formats.merge({format.count('#') => format}) }
 
     to_formatted_number(formats)
   end
@@ -14,8 +14,9 @@ String.class_eval do
 
   def to_formatted_number(formats = {})
     digits = scan(/\d/)
-    if formats[digits.size]
-      final_string = formats[digits.size].each_char.inject('') do |result, character|
+    total_digits = digits.size
+    if formats[total_digits]
+      final_string = formats[total_digits].each_char.inject('') do |result, character|
         character == '#' ? result << digits.shift : result << character
         result
       end
@@ -25,12 +26,4 @@ String.class_eval do
     end
   end
 
-  private
-
-  def format_sizes(formats_array)
-    formats_array.flatten.inject({}) do |all_formats, format|
-      all_formats[format.count('#')] = format
-      all_formats
-    end
-  end
 end

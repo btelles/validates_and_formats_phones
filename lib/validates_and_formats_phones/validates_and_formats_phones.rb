@@ -2,44 +2,44 @@
     DEFAULT_FORMAT = "(###) ###-####"
     def self.included(base)
       base.send :extend, ClassMethods
+      base.send :include, InstanceMethods
+    end
+
+    def self.extract_formats_and_fields(formats_and_fields)
+      formats = []
+      fields = []
+      formats_and_fields.each do |option|
+        option.to_s =~ /#/ ?
+          formats << option :
+          fields << option.to_sym
+      end
+      formats << DEFAULT_FORMAT if formats.empty?
+      fields  << :phone if fields.empty?
+      [formats, fields]
     end
 
     module ClassMethods
 
-
       def validates_and_formats_phones(*args)
-        formats, fields = extract_formats_and_fields(args)
-        send :include, InstanceMethods
+        formats, fields = ValidatesAndFormatsPhones.extract_formats_and_fields(args)
+
+        size_options = formats.collect {|format| format.count '#'}
 
         validates_each *fields do |record, attr, value|
-          size_options = formats.collect {|a| a.count '#'}
           unless value.blank? || size_options.include?(value.scan(/\d/).size)
             if size_options.size > 1
               last = size_options.pop
-              record.errors.add attr, "must have #{size_options.join(', ')} or #{last} digits."
+              message = "must have #{size_options.join(', ')} or #{last} digits."
             else
-              record.errors.add attr, "must have #{size_options[0]} digits."
+              message = "must have #{size_options[0]} digits."
             end
+            record.errors.add attr, message 
           else
             record.format_phone_field(attr, formats)
           end
         end
       end
 
-      private
-
-      def extract_formats_and_fields(formats_and_fields)
-        formats = []
-        fields = []
-        formats_and_fields.each do |option|
-          option.to_s =~ /#/ ?
-            formats << option :
-            fields << option.to_sym
-        end
-        formats << DEFAULT_FORMAT if formats.empty?
-        fields  << :phone if fields.empty?
-        [formats, fields]
-      end
     end
 
     module InstanceMethods
