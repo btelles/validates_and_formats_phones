@@ -10,6 +10,8 @@ String.class_eval do
     to_formatted_number(formats)
   end
 
+  private
+
   def to_formatted_number(formats = {})
     digits = scan(/\d/)
     if formats[digits.size]

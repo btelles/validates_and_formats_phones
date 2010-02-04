@@ -65,4 +65,15 @@ You can also format and specify fields, like so:
     validates_and_formats_phones :fax, mobile, '####-####'
   end
 
+As a tiny added benefit, String is extended with a to_phone method.
+
+  > '123 456 7890'.to_phone
+  > => '(123) 456-7890'
+  >
+  > '12345678'.to_phone('####-####')
+  > => '1234-5678'
+
+If you find any bugs, please report them at our github page:
+
+  http://github.com/btelles-validates_and_formats_phones
 Copyright (c) 2010 [Bernie Telles], released under the MIT license
