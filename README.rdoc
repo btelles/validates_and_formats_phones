@@ -41,6 +41,7 @@ validation and formatting for the field :phone like so:
   > person.save
   > => false
 
+
 You can pass your own fields like so:
 
   class Person
@@ -65,6 +66,22 @@ You can also format and specify fields, like so:
     validates_and_formats_phones :fax, mobile, '####-####'
   end
 
+
+= Additional configuration options
+
+As of version 0.0.6 all configuration options available 
+to validates_each are also available to the phone validator.
+For example:
+
+  class Person
+    validates_and_formats_phones :fax, '###-###-####', :if => :some_function_name
+  end
+
+Here's a quick link to the validates_each documentation at the time of writing:
+
+  http://api.rubyonrails.com/classes/ActiveRecord/Validations/ClassMethods.html#M002161
+
+
 As a tiny added benefit, String is extended with a to_phone method.
 
   > '123 456 7890'.to_phone
@@ -73,6 +90,9 @@ As a tiny added benefit, String is extended with a to_phone method.
   > '12345678'.to_phone('####-####')
   > => '1234-5678'
 
+=Change Log
+ 0.0.6
+  1. Add configuration options available in validates_each method.
 If you find any bugs, please report them at our github page:
 
   http://github.com/btelles-validates_and_formats_phones
