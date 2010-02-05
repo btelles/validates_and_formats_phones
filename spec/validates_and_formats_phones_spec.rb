@@ -8,6 +8,19 @@ class OptionsPhone < ActiveRecord::Base
                                '####-####',
                                '(###) ###-####'
 end
+class IfOption < ActiveRecord::Base
+  validates_and_formats_phones :phone_if_true, :if => :true_function
+  validates_and_formats_phones :phone_if_false, :if => :false_function
+  validates_and_formats_phones :phone_unless_false, :unless => :false_function
+  validates_and_formats_phones :phone_unless_true, :unless => :true_function
+
+  def true_function
+    true
+  end
+  def false_function
+    false
+  end
+end
 
 describe "ValidatesAndFormatsPhones" do
 
@@ -63,7 +76,26 @@ describe "ValidatesAndFormatsPhones" do
       end
 
     end
+  end
 
-      
+  # These just test a few options from the standard validates_each configuration.
+  describe "validates if " do
+    it "'if' option is used and evaluates to true" do
+      IfOption.create(:phone_if_true => 'invalid').valid?.should == false
+      IfOption.create(:phone_if_true => '3333333333').valid?.should == true
+    end
+    it "'unless' option is used and evaluates to true" do
+      IfOption.create(:phone_unless_false => '123-invalid').valid?.should == false
+      IfOption.create(:phone_unless_false => '123-456-7890').valid?.should == true
+    end
+  end
+
+  describe "does not validate if " do
+    it "'if' option is used and evaluates to false" do
+      IfOption.create(:phone_if_false => 'invalid').valid?.should == true
+    end
+    it "'unless' option is used and evaluates to true" do
+      IfOption.create(:phone_unless_true => '123-invalid').valid?.should == true
+    end
   end
 end

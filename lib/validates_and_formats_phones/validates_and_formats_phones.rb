@@ -6,6 +6,8 @@
     end
 
     def self.extract_formats_and_fields(formats_and_fields)
+      options = {:on => :save, :allow_nil => false}
+      options.merge!(formats_and_fields.extract_options!)
       formats = []
       fields = []
       formats_and_fields.each do |option|
@@ -15,17 +17,17 @@
       end
       formats << DEFAULT_FORMAT if formats.empty?
       fields  << :phone if fields.empty?
-      [formats, fields]
+      [formats, fields, options]
     end
 
     module ClassMethods
 
       def validates_and_formats_phones(*args)
-        formats, fields = ValidatesAndFormatsPhones.extract_formats_and_fields(args)
+        formats, fields, options = ValidatesAndFormatsPhones.extract_formats_and_fields(args)
 
         size_options = formats.collect {|format| format.count '#'}
 
-        validates_each *fields do |record, attr, value|
+        validates_each(fields, options) do |record, attr, value|
           unless value.blank? || size_options.include?(value.scan(/\d/).size)
             if size_options.size > 1
               last = size_options.pop
