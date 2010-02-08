@@ -93,6 +93,8 @@ As a tiny added benefit, String is extended with a to_phone method.
   > => '1234-5678'
 
 =Change Log
+ 0.0.7
+  1. Bug fix for ...yes... Ruby 1.8.5...That's dedication right there.
  0.0.6
   1. Add configuration options available in validates_each method.
 If you find any bugs, please report them at our github page:
