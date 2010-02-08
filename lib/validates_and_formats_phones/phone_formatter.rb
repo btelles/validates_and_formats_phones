@@ -16,11 +16,11 @@ String.class_eval do
     digits = scan(/\d/)
     total_digits = digits.size
     if formats[total_digits]
-      final_string = formats[total_digits].each_char.inject('') do |result, character|
+      result = ''
+      formats[total_digits].each_char do | character|
         character == '#' ? result << digits.shift : result << character
-        result
       end
-      final_string
+      result
     else
       self
     end
