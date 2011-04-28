@@ -12,11 +12,11 @@ But you can change all that...just read on.
 
 1. Install it as a gem:
 
-      sudo gem install validates_and_formats_phones
+      (sudo) gem install validates_and_formats_phones
 
-2. Then add it to your <tt>environment.rb</tt> file
+2. Then add it to your <tt>Gemfile</tt> file
 
-      config.gem 'validates_and_formats_phones'
+      gem 'validates_and_formats_phones', '~> 1.0.0'
 
 3. Add the method <tt>validates_and_formats_phones</tt> to your model
 
@@ -69,8 +69,8 @@ You can also format and specify fields, like so:
 
 == Configuration options
 
-As of version 0.0.6 all configuration options available 
-to validates_each are also available to the phone validator.
+All configuration options available to validates_each are also available
+to the phone validator.
 For example:
 
   class Person
@@ -79,7 +79,7 @@ For example:
 
 Here's a quick link to the validates_each documentation at the time of writing:
 
-  http://api.rubyonrails.com/classes/ActiveRecord/Validations/ClassMethods.html#M002161
+  http://api.rubyonrails.org/classes/ActiveModel/Validations/ClassMethods.html#method-i-validates_each
 
 
 == Tiny string extension
@@ -93,6 +93,10 @@ As a tiny added benefit, String is extended with a to_phone method.
   > => '1234-5678'
 
 =Change Log
+ 1.0.0
+  No significant changes.
+ 0.0.10
+  1. Make compatible with Rails 3 (note this breaks compatibility with previous Rails versions)
  0.0.7
   1. Bug fix for ...yes... Ruby 1.8.5...That's dedication right there.
  0.0.6
