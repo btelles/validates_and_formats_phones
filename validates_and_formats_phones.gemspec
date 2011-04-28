@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
 
-  s.add_development_dependencies 'rspec'
-  s.add_dependencies 'active_record'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'jeweler'
+
+  s.add_dependency 'active_record'
 end
