@@ -28,7 +28,7 @@ module ValidatesAndFormatsPhones
       size_options = formats.collect {|format| format.count '#'}
 
       validates_each(*args) do |record, attr, value|
-        unless (value.present? && size_options.include?(value.scan(/\d/).size)) || options[:allow_nil]
+        unless value.blank? || size_options.include?(value.scan(/\d/).size)
           if size_options.size > 1
             last = size_options.pop
             message = "must have #{size_options.join(', ')} or #{last} digits."
