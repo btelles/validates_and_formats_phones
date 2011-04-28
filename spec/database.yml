@@ -1,3 +1,0 @@
-sqlite3:
-  adapter: sqlite3
-  database: vendor/plugins/validates_and_formats_phones/spec/validates_phones_plugin.sqlite3
