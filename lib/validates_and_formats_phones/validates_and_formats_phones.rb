@@ -27,7 +27,7 @@ module ValidatesAndFormatsPhones
 
       size_options = formats.collect {|format| format.count '#'}
 
-      validates_each(*args) do |record, attr, value|
+      validates_each(*fields) do |record, attr, value|
         unless value.blank? || size_options.include?(value.scan(/\d/).size)
           if size_options.size > 1
             last = size_options.pop
